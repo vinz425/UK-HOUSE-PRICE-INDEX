@@ -1,0 +1,18 @@
+# Columns for new vs. old property prices
+new_old_prices = ['NewPrice', 'OldPrice']
+
+# Grouping by date and computing mean prices for new and old properties
+new_old_trends = df.groupby('Date')[new_old_prices].mean().reset_index()
+
+# Plotting new vs old property price trends
+plt.figure(figsize=(14, 6))
+for col in new_old_prices:
+    plt.plot(new_old_trends['Date'], new_old_trends[col], label=col.replace('Price', ''))
+
+plt.title('UK Average Property Price Trend: New vs Old Builds (2004–2024)')
+plt.xlabel('Date')
+plt.ylabel('Average Price (£)')
+plt.legend(title='Build Type')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
