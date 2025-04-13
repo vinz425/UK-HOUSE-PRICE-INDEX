@@ -1,0 +1,16 @@
+# Group by date and calculate mean prices by property type
+property_types = ['DetachedPrice', 'SemiDetachedPrice', 'TerracedPrice', 'FlatPrice']
+property_price_trends = df.groupby('Date')[property_types].mean().reset_index()
+
+# Plotting property type price trends
+plt.figure(figsize=(14, 6))
+for prop in property_types:
+    plt.plot(property_price_trends['Date'], property_price_trends[prop], label=prop.replace('Price', ''))
+
+plt.title('UK Average Property Price Trend by Property Type (2004–2024)')
+plt.xlabel('Date')
+plt.ylabel('Average Price (£)')
+plt.legend(title='Property Type')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
