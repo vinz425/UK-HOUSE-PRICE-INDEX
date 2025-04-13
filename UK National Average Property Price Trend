@@ -1,0 +1,17 @@
+# Convert the 'Date' column to datetime format
+df['Date'] = pd.to_datetime(df['Date'], dayfirst=True)
+
+# Group by date and calculate the mean average price for the UK
+national_price_trend = df.groupby('Date')['AveragePrice'].mean().reset_index()
+
+# Plotting the national average price trend over time
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(14, 6))
+plt.plot(national_price_trend['Date'], national_price_trend['AveragePrice'], linewidth=2)
+plt.title('UK National Average Property Price Trend (2004–2024)')
+plt.xlabel('Date')
+plt.ylabel('Average Price (£)')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
