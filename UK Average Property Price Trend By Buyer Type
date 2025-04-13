@@ -1,0 +1,18 @@
+# Buyer type price columns
+buyer_types = ['CashPrice', 'MortgagePrice', 'FTBPrice', 'FOOPrice']
+
+# Grouping by date and computing mean prices for each buyer type
+buyer_price_trends = df.groupby('Date')[buyer_types].mean().reset_index()
+
+# Plotting buyer type price trends
+plt.figure(figsize=(14, 6))
+for buyer in buyer_types:
+    plt.plot(buyer_price_trends['Date'], buyer_price_trends[buyer], label=buyer.replace('Price', ''))
+
+plt.title('UK Average Property Price Trend by Buyer Type (2004–2024)')
+plt.xlabel('Date')
+plt.ylabel('Average Price (£)')
+plt.legend(title='Buyer Type')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
